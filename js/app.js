@@ -5,23 +5,39 @@ import '../js/dior.js'
 import '../js/nostrefresh.js'
 
 // COMPONENTS
-import Navbar from '../components/Navbar.js'
-import Bookmarks from '../components/Bookmarks.js'
+function Image(props) {
+  return html`
+    <div
+      class="p-10 flex flex-col items-center text-center group     hover:bg-slate-50 cursor-pointer"
+    >
+      <img class="h-200" src="${props.image}" />
+      <p class="text-xl font-medium text-slate-700 mt-3">
+        <a href="${props.image}" target="_blank" >link 🔗</a>
+      </p>
+    </div>
+  `
+}
 
-// INIT
-var doc = di.data
-var bookmarks = doc.bookmark
+// MAIN
 
-// RENDER
+console.log(di.data)
+
 render(
   html`
-          <${Navbar} title="Images" />
+    <div
+      class="px-3 md:lg:xl:px-40   border-t border-b py-20 bg-opacity-10"
+      style="background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/dot-grid.png') ;"
+    >
+    <b>Marked Images</b>
 
-
-
-          <${Bookmarks} bookmarks="${di.data.reverse()}" />
-        `,
-  document.body
-)
-
-console.log(doc)
+      <div
+        class="grid grid-cols-1 md:lg:xl:grid-cols-3 group bg-white shadow-xl shadow-neutral-100 border "
+      >
+        ${di.data.reverse().map(i => {
+    return html`
+            <${Image} loading="lazy" image="${i}" />
+          `
+  })}
+      </div>
+    </div>
+  `, document.body)
