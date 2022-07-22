@@ -22,6 +22,8 @@ function Image(props) {
 
 console.log(di.data)
 
+const deleted = ['https://i.redd.it/xp7jut5j01c91.jpg', 'https://i.redd.it/qv4ajav1wrc91.jpg']
+
 render(
   html`
     <div
@@ -33,7 +35,7 @@ render(
       <div
         class="grid grid-cols-1 md:lg:xl:grid-cols-3 group bg-white shadow-xl shadow-neutral-100 border "
       >
-        ${di.data.reverse().map(i => {
+        ${di.data.reverse().filter(i => !deleted.includes(i)).map(i => {
     return html`
             <${Image} loading="lazy" image="${i}" />
           `
